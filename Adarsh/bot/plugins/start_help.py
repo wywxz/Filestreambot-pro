@@ -12,7 +12,7 @@ from pyrogram.errors import UserNotParticipant
 from Adarsh.utils.file_properties import get_name, get_hash, get_media_file_size
 db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
             
-@StreamBot.on_message((filters.command("start") | filters.regex('start⚡️')) & filters.private & ~filters.edited)
+@StreamBot.on_message(filters.command("start") & filters.private & ~filters.edited)
 async def start(b, m):
     if not await db.is_user_exist(m.from_user.id):
         await db.add_user(m.from_user.id)
@@ -55,11 +55,11 @@ async def start(b, m):
             return
     await StreamBot.send_message(
         m.chat.id,
-        f'Hi {m.from_user.mention(style="md")}!,\nI am Telegram File to Link Generator Bot with Channel support.\nSend me any file and get a direct download link and streamable link.!'
+        f'Hi {m.from_user.mention(style="md")}!\n<i>I am Telegram File to Link Generator Bot with Channel support.</i>\n\n<b>Send me any file and get a direct download link and streamable link!</b>\n\n/help for more details!'
     )
 
 
-@StreamBot.on_message((filters.command("help") | filters.regex('help📚')) & filters.private & ~filters.edited)
+@StreamBot.on_message(filters.command("help") & filters.private & ~filters.edited)
 async def help_handler(bot, message):
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id)
@@ -101,14 +101,14 @@ async def help_handler(bot, message):
                 disable_web_page_preview=True)
             return
     await message.reply_text(
-        text="""<b> Send me any file or video i will give you streamable link and download link.</b>\n
-<b> I also support Channels, add me to you Channel and send any media files and see miracle✨ also send /list to know all commands""",
+        text="""<b>Send me any file or video I will give you streamable link and download link.</b>\n\n
+<i>I also support Channels, add me to you Channel and send any media files and see miracle ✨ </i>""",
         parse_mode="HTML",
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton("💁‍♂️ DEV", url="https://t.me/agprojects")],
-                [InlineKeyboardButton("💥 FOLLOW", url="https://GitHub.com/adarsh-goel")]
+                [InlineKeyboardButton("💁‍♂️ DEV", url="https://t.me/SimpleBotsChannel")]
+                #[InlineKeyboardButton("💥 FOLLOW", url="https://gitHub.com/wywxz")]
             ]
         )
     )
