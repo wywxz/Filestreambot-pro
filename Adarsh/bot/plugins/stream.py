@@ -95,7 +95,6 @@ async def private_receive_handler(c: Client, m: Message):
                 disable_web_page_preview=True)
             return
     try:
-
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = f"{Var.URL}watch/{str(log_msg.message_id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         
@@ -104,7 +103,7 @@ async def private_receive_handler(c: Client, m: Message):
         msg_text ="""
 <i><u>𝗬𝗼𝘂𝗿 𝗟𝗶𝗻𝗸 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱!</u></i>
 
-<b>📂 File name :</b> <i>{}</i>
+<b>📂 File name:</b> <i>{}</i>
 
 <b>📦 File size:</b> <i>{}</i>
 
